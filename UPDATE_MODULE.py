@@ -12,7 +12,7 @@ import ctypes
 import requests
 from  zipfile import ZipFile
 #variables----------------------
-last_update="2022-11-29"
+last_update="2023-06-13"
 repo_name="UPM-UPdate_Module_for_app"
 url="https://raw.rawgit.net/wleng2001/UPM-UPdate_Module_for_app/main/UPDATE_MODULE.py"
 new_version_name="UPDATE_MODULE.py"

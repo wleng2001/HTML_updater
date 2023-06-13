@@ -31,7 +31,7 @@ elif update_available==True:
     ask=input("Do you want download it now (Y/n): ")
     ask=ask.upper()
     if ask=="Y":
-        if_download=UPDATE_MODULE.download_update_repo("https://codeload.github.com/wleng2001/HTML_updater/zip/refs/heads/main?token=A2XB2BH5NRW4ZAGZQPAUP5DERC5P6", os.getcwd())
+        if_download=UPDATE_MODULE.download_update_repo("https://codeload.github.com/wleng2001/HTML_updater/zip/refs/heads/main", os.getcwd())
         if if_download==False:
             print("Lost connection file wasn't downloaded")
 else:

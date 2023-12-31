@@ -11,7 +11,7 @@ import os
 imf= important_functions.important_func()
 
 #info of version
-date="2023-06-13"
+date="2023-12-31"
 name_app="HTML_updater"
 
 GUI=True

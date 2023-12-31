@@ -11,8 +11,10 @@ from sys import platform, executable, argv
 import ctypes
 import requests
 from  zipfile import ZipFile
+import tkinter as tk
+from tkinter import messagebox as msg
 #variables----------------------
-last_update="2023-06-13"
+last_update="2023-12-31"
 repo_name="UPM-UPdate_Module_for_app"
 url="https://raw.rawgit.net/wleng2001/UPM-UPdate_Module_for_app/main/UPDATE_MODULE.py"
 new_version_name="UPDATE_MODULE.py"
@@ -136,21 +138,47 @@ def download_update_file(url, path, file_name): #url must be in raw format for e
     except:
         return False
 
+
+def question_window(question, window_name):
+    window = tk.Tk()
+    window.withdraw()
+    return msg.askquestion(window_name, question)
+    
+
 #full update of update module
-def update_self(terminal_mode=True):
-    if terminal_mode==True or terminal_mode==False:
-        update_available=update_check(last_update, repo_name)
-        if update_available==None:
+def update_self(terminal_mode = True):
+    if terminal_mode == False:
+        window = tk.Tk()
+        window.withdraw()
+    update_available=update_check(last_update, repo_name)
+    if update_available==None:
+        if terminal_mode == True:
             print("You don't have internet connection.")
-        elif update_available==True:
+        else:
+            msg.showinfo(title = "UPM", message = "You don't have internet connection.")
+    elif update_available==True:
+        if terminal_mode == True:
             print("Update of updater is available!")
             ask=input("Do you want download it now (Y/n): ")
             ask=ask.upper()
             if_download=None
             if ask=="Y":
                 if_download=download_update_file(url,getcwd(), new_version_name)
-                print("Updater was updated.")
             if if_download==False:
-                print("Lost connection file wasn't downloaded")
+                print("Lost connection, file wasn't downloaded")
+            else:
+                print("Updater was updated.")
         else:
+            ask = question_window("Update is available!\nDownload it now?", "UPM")
+            if_download = None
+            if(ask == "yes"):
+                if_download = download_update_file(url, getcwd(), new_version_name)
+            if if_download == False:
+                msg.showinfo("UPM", "Lost connection, file wasn't download")
+            else:
+                msg.showinfo("UPM","Updater was updated")
+    else:
+        if terminal_mode == True:
             print("Updater is current")
+        else:
+            msg.showinfo("UPM", "Updater is current")

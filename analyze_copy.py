@@ -177,7 +177,5 @@ def main_analyze_copy(headers, file_name, file,  search_subfolder, only_html=Tru
     file.close()
     files_to_edit=find_files_to_edit(file_name, search_subfolder)
     edit_found_files(files_to_edit, headers)
-
-        
-#main_analyze_copy(["<footer","<header"], "C:\\Users\\kamil\\OneDrive\\python\\program do aktualizacji html\\tresc\\index.html", None, False, True)
+    return files_to_edit
 

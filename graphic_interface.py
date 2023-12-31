@@ -2,6 +2,9 @@
 import tkinter as tk
 import analyze_copy as ac
 import important_functions as important_functions
+import one_line_copy as one_line_copy
+
+olc = one_line_copy.one_line_copy()
 
 imf= important_functions.important_func()
 
@@ -15,7 +18,8 @@ file=None
 contents=""
 path_file=None
 
-if_search_subfolder=False
+copy_file_in_one_line = tk.BooleanVar()
+if_search_subfolder=tk.BooleanVar()
 checkbox_name=["Podmień header", "Podmień artykuł", "Podmień stopkę"]
 checkbox_html=["<header", "<article", "<footer"]
 checkbox_variable=[]
@@ -73,21 +77,33 @@ def graphic_mode(source_path):
             x=x-x_add
 
     # second last row
+    
     x=x_max_left
     y=y+20
     draw_line(window, x, y, 50)
-    if_search_subfolder_chb=tk.Checkbutton(window, text="Przeszukuj podfoldery", variable=tk.BooleanVar(if_search_subfolder), onvalue=1, offvalue=0)
+    if_search_subfolder_chb=tk.Checkbutton(window, text="Przeszukuj podfoldery", variable=if_search_subfolder, onvalue=1, offvalue=0)
     if_search_subfolder_chb.pack()
     if_search_subfolder_chb.place(x=x, y=y+20)
+    
+    copy_file_in_one_line_chb = tk.Checkbutton(window, text="Utwórz kopie jednoliniowe", variable=copy_file_in_one_line, onvalue=1, offvalue=0)
+    copy_file_in_one_line_chb.pack()
+    copy_file_in_one_line_chb.place(x=x+x_add, y=y+20)
+    
+    
 
     #last row
-
+    
+    
     def analyze_file():
         headers=[]
         for i in range(0,len(checkbox_variable)):
             if checkbox_variable[i].get()==True:
                 headers.append(checkbox_html[i])
-        ac.main_analyze_copy(headers, file_name, "", if_search_subfolder)
+        files_to_edit =  ac.main_analyze_copy(headers, file_name, "", if_search_subfolder.get())
+        
+        if copy_file_in_one_line.get() == True:    
+            olc.filesToCopy = files_to_edit
+            olc.CopyAndEdit()
             
     x, y=430, 300
     allow_b=tk.Button(window, text="Podmień", width=10, command=lambda:analyze_file())

@@ -38,6 +38,7 @@ def graphic_mode(source_path):
     global file, contents, path_file, file_name
     window.title(app_name)
     window.geometry(geo)
+    window.resizable(width=False, height=False)
     x, y=10, 10
     file_inf=tk.Label(window, text="Wybierz plik wzornika",fg="black")
     file_inf.pack()

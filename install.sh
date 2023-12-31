@@ -1,6 +1,6 @@
 #!/bin/bash 
 #Program installs required app and library for UPDATE_MODULE
-library_t=("gitdb" "typing_extensions" "pygithub" "gitpython");
+library_t=("gitdb" "typing_extensions" "pygithub" "gitpython" "requests");
 echo "Welcome in UPDATE_MODULE installer"
 echo "Updating system"
 sudo apt-get update
